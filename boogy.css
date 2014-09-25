@@ -66,6 +66,7 @@
 	/* margin: 2px; */
 	line-height: 60%;
 	text-align: center;
+	z-index: 100;
   
 }
 .clicked{
@@ -88,10 +89,11 @@
 	-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
 	-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
 	box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
-	z-index: 1001;
 	width: 300px;
 	padding: 8px;
 	border: 2px solid #625B5F;
+	background-color: #CAFFDB;
+	z-index:130000;
 }
 
 #explanation, #about{
@@ -172,6 +174,7 @@ background-color:#DAD6B6;
 	height: 50px;
 	float: left;
 	margin-left: 30px;
+
 }
 #slidertext{
 	font-family: "Open Sans",Arial,Verdana, sans serif;

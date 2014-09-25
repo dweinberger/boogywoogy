@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>EmbeddedEditorHidden:weinbergerd</key>
+	<false/>
+	<key>ExpandedEditorWidth:weinbergerd:displays([(0, 0), (1440, 900)])</key>
+	<integer>850</integer>
+	<key>ExpandedItems:weinbergerd</key>
+	<array/>
+	<key>FileFilterMode:weinbergerd</key>
+	<integer>0</integer>
+	<key>OpenDocuments:weinbergerd</key>
+	<array/>
+	<key>OpenDocumentsExpanded</key>
+	<true/>
+	<key>OpenDocumentsVisible</key>
+	<true/>
+	<key>ProjectViewVisible</key>
+	<true/>
+	<key>RecentItems:weinbergerd</key>
+	<array/>
+	<key>RecentItemsExpanded</key>
+	<true/>
+	<key>RecentItemsVisible</key>
+	<true/>
+	<key>ScratchpadItemsExpanded</key>
+	<true/>
+	<key>ScratchpadItemsVisible</key>
+	<true/>
+	<key>ShowSCMData:weinbergerd</key>
+	<false/>
+	<key>ToolbarVisible:weinbergerd</key>
+	<true/>
+	<key>ViewSplitterPosition:weinbergerd</key>
+	<real>0.18286813795566559</real>
+	<key>WindowFrame:weinbergerd:displays([(0, 0), (1440, 900)])</key>
+	<string>rect(44,742,851,1781)</string>
+</dict>
+</plist>
