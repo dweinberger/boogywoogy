@@ -6,7 +6,9 @@
 	
 	This demo was written by a hobbyist, so the code should not be taken seriously. In fact, it should be forgiven. And it is using a very early alpha version of the LibraryCloud API. It currently uses a jQuery plugin that I developed to get data out of the complex JSON that the API returns. (The API uses a schema based on standard MODS). The plugin is lousy. At some point, perhaps soon, it will be obviated as the LibraryCloud API, and the platform's enhancement processes, are improved.
 	
-	The laughable source code is here: https://github.com/dweinberger/boogywoogy
+	The laughable source code is here: https://github.com/dweinberger/boogywoogy.
+	
+	There's a version of it live at http://hyperorg.com/programs/boogywoogybrowser/boogywoogy01.html
 	
 	David Weinberger
 	Sept. 25, 2014
