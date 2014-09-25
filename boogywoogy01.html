@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF8">
+		<title>BoogyWoogy Browser</title>
+		
+<link href="boogy.css" rel="stylesheet" type="text/css" media="all" />
+<link href="includes/jquery.qtip.custom/jquery.qtip.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="boogy01.js"></script>	
+<script type="text/javascript" src="includes/jquery-1.11.0.min.js"></script>
+<script src="includes/simple-slider.js"></script>
+<link href="includes/simple-slider.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="includes/checkStopWords.js"></script>
+<script type="text/javascript" src="includes/jquery.qtip.custom/jquery.qtip.js"></script>
+<script type="text/javascript" src="includes/jquery-librarycloud-dw.js"></script>
+<!--script type="text/javascript" src="includes/Morphist-1.0.0/dist/morphist.min.js"></script-->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link rel="icon" type="image/ico" href="favicon.ico">
+
+<script language="javascript" type="text/javascript">
+	$(document).ready(function(){	
+		init();	
+	});
+</script>
+
+<body>
+	<!-- title bar -->
+	<div id="pagetitlediv">
+		<span id="pagetitle">BoogyWoogy</span>
+		<span id=pagesubtitle">A LibraryCloud serendipity browser (demo)</span>
+		<span id="resetbtn" class="off" onclick="resetQuestion()">Reset</span>
+		<span id="instructionsbutton" class="on" onclick="toggleButtons('explanation')">Help</span>
+		<span id="aboutbutton" class="off" onclick="toggleButtons('about')">About</span>
+	</div>
+	<!-- dropdown explanation -->
+	<div id="explanation">
+		<div class="explans">
+			BoogyWoogy &mdash; an homage to <a href="http://www.moma.org/collection/object.php?object_id=78682">Piet Mondrian</a> &mdash;
+			lets you explore Harvard Library's collection of almost 13 million items as serendipitiously as you would like.
+		</div>
+		<div class="explans">
+			Begin by entering a term to search for. After that, clicking on a filled-in square will fetch items that are like it. But you get to
+			use the Serendipity Slider to decide what "like it" means. At one end, you'll get items within the same official subject.
+			At the other, you'll get items just barely related, or perhaps not related at all.
+		</div>
+		<div class="explans">
+			To explore any item, right-click on it (or whatever button you use to get a context menu) and confirm that you want to see it 
+			in <a href="http://stacklife.harvard.edu">StackLife</a>, a very cool library browser that works with a prior version of LibraryCloud,
+			the open metadata server that is also behind this little app.
+		</div>
+		<div class="explans">
+			In fact, BoogyWoogy is intended just as a demonstration of a little of the power of Harvard LibraryCloud, the server technology that's underneath BoogyWoogy's
+			too-bright colors. You can find out more about LibraryCloud <a href="http://librarycloud.harvard.edu">here</a>. (And please note
+			that this app was written by a non-developer. Just a hobbyist. Which, come to think of it, is one of the reasons we're building 
+			LibraryCloud. So, have fun! &nbsp;&nbsp;&nbsp;
+			<span class= "instructionsbtn" onclick="toggleButtons('explanation')" style="text-decoration:underline;color:blue;">Hide</span>
+		</div>
+	</div>
+	
+	<!-- dropdown about -->
+	<div id="about" style="display:none">
+		<div class="explans">
+			BoogyWoogy is a demo written by a hobbyist to try out and show off some of the capabilities of <a href="http://librarycloud.harvard.edu">Harvard LibraryCloud</a>.
+		</div>
+		<div class="explans">
+			LibraryCloud makes openly available Harvard's information about the almost thirteen million
+			items in its combined collections (73 libraries plus a large off-campus repository), and more.
+			Any developer can use this rich set of information to create applications like BoogyWoogy (except
+			better) without asking permission or making special arrangements. LibraryCloud is at this point (Sept. 2014) 
+			a prototype that we hope will become a maintained part of Harvard Library's infrastructure.
+		</div>
+		<div class="explans">
+			BoogyWoogy is an Open Source project (as is LibraryCloud).  It builds on an idea from Jeff Goldenson. The laughable source code is on <a href="https://github.com/dweinberger/boogywoogy/">Github</a>. If you hit bugs (you will) or have suggestions, send an email
+			to me at self@evident.com. Thanks! -- David Weinberger, Sept. 25, 2014
+			<span class= "instructionsbtn" onclick="toggleButtons('about')" style="text-decoration:underline;color:blue;">Hide</span>
+		</div>
+	</div>
+	
+		<div class="clear"></div>
+	
+	<!-- Search and slider interface -->
+	<div id="ui">
+		<!-- search box -->
+		<div id="searchdiv">
+			<textarea id="searchbox" placeholder="Enter a search term"></textarea>
+			<input type="button" onclick="startSearch()" value="Search">
+		</div>
+		<span id="statusbox"></span>
+		<!-- slider -->
+		<div id="sliderdiv">
+			<input id="slider" type="text" data-slider="true"><br>
+			<span id="slidertext"><span style="font-family: 'Open Sans',Arial; color:black;font-weight:300;font-size:12px">STRICTEST</span></span>
+			<span class="smallbtn" onclick="$('#sliderinfodiv').slideToggle(300)">about</span>
+			<div id="sliderinfodiv" style="display:none">
+				<div class="explans">
+					This slider controls how much serendipity you want when LibraryCloud finds related items.
+				<br /><br />
+				STRICTEST: Items in the same primary subject.<br>
+				STRICT: Items in the last subject listed for the item you clicked on.<br>
+				SORTOF: A keyword search on the first word of the primary subject<br>
+				WEAK: Take the first word of the title (other than "The", etc.) and search for it within items sharing  the last subject.<br>
+				KEVIN BACON: A keyword search on the first real world of the title.
+				</div>
+			 </div>
+		</div>
+	</div>
+	<div class="spacer"></div>
+	<!-- Grid goes here -->
+	<div id="outerdiv" class="outerdiv">
+	</div>
+
+
+
+</body>
+</html>
