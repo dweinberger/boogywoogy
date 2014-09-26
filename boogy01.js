@@ -61,12 +61,12 @@ var searchArray = [];
 var gcolorctr = 0;
 // background and foreground pairs:
 var colors = [["#FFCC66","#800000"],["#66FFCC","#000080"],["#CC66FF","#004080"],
-			  ["#66CCFF","#800080"],["#FF6FCF","#800000"],["#000000","#FFFFFF"],
+			  ["#66CCFF","#000080"],["#FF6FCF","#800000"],["#000000","#FFFFFF"],
 			  ["#FF6666","#520101"],["#FFFF66","#158409"],["#66FF66","#008080"],
-			  ["#66FFFF","#000080"],["#6666FF","#800080"],["#800000","#FFFF66"],
-			  ["#FF0000","#000000"],["#008000","#CCFF66"],["#000080","#FFFF66"],
+			  ["#66FFFF","#000080"],["#6666FF","#000000"],["#800000","#FFFF66"],
+			  ["#FF0000","#FFFFFF"],["#008000","#CCFF66"],["#000080","#FFFF66"],
 			  ["#800080","#FFCC66"],["#008040","#FFFF00"],["#FF00FF","#000000"],
-			  ["#00FFFF","#000080"],["#4C4C4C","#FFFFFF"],["#9E9E9E","#DA5700"]];
+			  ["#00FFFF","#000080"],["#4C4C4C","#FFFFFF"],["#9E9E9E","#370101"]];
 
 function init(){
 
@@ -265,10 +265,9 @@ function fetchBooks(clickedBox_xy){
 		term = $("#searchbox").val();
 		var typeofsearch = "KEYWORD";
 		// get random starting points.
-		 var aa = Math.floor(Math.random() * 13);
+		var aa = Math.floor(Math.random() * 13);
 		var bb = Math.floor(Math.random() * 13);
  		clickedBox_xy = [aa,bb];
-		//clickedBox_xy=["4","4"];
 	}
 	// click on a filled-in box
 	else {
@@ -279,21 +278,37 @@ function fetchBooks(clickedBox_xy){
 		// what type of search?
 		switch (slidervalue){
 			case "STRICTEST":
-				term = gbookgrid[booknumb]["subject"][0];
+				if ($.isArray(gbookgrid[booknumb]["subject"])){
+					term = gbookgrid[booknumb]["subject"][0];
+				}
+				else { 	// Sleazy: If LibCloud returns no subject, 
+						// just use the search term
+					term = $("#searchbox").val();
+				}
 				typeofsearch = "SUBJECT";
 				searchArray.push({searchnumber : gsearchnumber, subjterm : term, keyterm: "", degree : "Strictest"});
 				break;
 			case "STRICT":
 				// get last subject and do subject search
-				var z =  gbookgrid[booknumb]["subject"].length;
-				z = z - 1;
-				term = gbookgrid[booknumb]["subject"][z];
+				if ($.isArray(gbookgrid[booknumb]["subject"])){
+					var z =  gbookgrid[booknumb]["subject"].length;
+					z = z - 1;
+					term = gbookgrid[booknumb]["subject"][z];
+				}
+				else { // if LibCloud returned no subject
+					term = $("#searchbox").val();
+				}
 				typeofsearch = "SUBJECT";
 				searchArray.push({searchnumber : gsearchnumber, subjterm : term, keyterm: "", degree : "Strict"});
 				break;
 			case "SORTOF":
 				// get the first subject's first word, do keyword search
-				term = gbookgrid[booknumb]["subject"][0];
+				if ($.isArray(gbookgrid[booknumb]["subject"])){
+					term = gbookgrid[booknumb]["subject"][0];
+				}
+				else { // if LibCloud returned no subject
+					term = $("#searchbox").val();
+				}
 				var p = term.indexOf(" ");
 				if (p > -1){
 					term = term.substr(0,p);
@@ -305,10 +320,14 @@ function fetchBooks(clickedBox_xy){
 				//  subject search and keyword search
 				var title = gbookgrid[booknumb]["title"][0];
 				var titleterm = firstNonStopword(title);
-				var z =  gbookgrid[booknumb]["subject"].length;
-				z = z - 1;
-				var subjterm = gbookgrid[booknumb]["subject"][z];
-				if (subjterm == undefined){subjterm = "";}
+				if ($.isArray(gbookgrid[booknumb]["subject"])){
+					var z =  gbookgrid[booknumb]["subject"].length;
+					z = z - 1;
+					subjterm = gbookgrid[booknumb]["subject"][z];
+				}
+				else { // if LibCloud returned no subject
+					subjterm = "";
+				}
 				// combine both terms, to be pulled apart in php
 				term = subjterm + "|||" + titleterm;
 				typeofsearch = "WEAK";
@@ -478,7 +497,9 @@ function layOutLine(clickedBox){
 				divbox.setAttribute("hollis",gbookline[i]["hollisid"]);
 				divbox.style.backgroundColor = colorPair[0];
 				divbox.style.color = colorPair[1];
-				$(divbox).hide().html(displayText).slideToggle(300);
+				// get random duration for fade
+				var fadetime = Math.floor(Math.random() * ((1100-100)+1) + 100);
+				$(divbox).hide().html(displayText).slideToggle(fadetime);
 				var booknumber = getBoxNumber(r,newc);
 				gbookgrid[booknumber]["direction"] = "HORIZONTAL";
 				gbookgrid[booknumber]["subject"] = gbookline[i]["subject"];
@@ -521,7 +542,8 @@ function layOutLine(clickedBox){
 				divbox.setAttribute("hollis",gbookline[i]["hollisid"]);
 				divbox.style.backgroundColor = colorPair[0];
 				divbox.style.color = colorPair[1];
-				$(divbox).hide().html(displayText).slideToggle(500);
+				var fadetime = Math.floor(Math.random() * ((1000-200)+1) + 200);
+				$(divbox).hide().html(displayText).fadeIn(fadetime);
 				var booknumber = getBoxNumber(newr,c);
 				gbookgrid[booknumber]["direction"] = "VERTICAL";
 				gbookgrid[booknumber]["subject"] = gbookline[i]["subject"];

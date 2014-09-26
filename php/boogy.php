@@ -4,7 +4,7 @@ ini_set('display_errors','On');
 error_reporting(E_ALL);
 
 function debugPrint($s){
-	if (1==2){
+	if (1==1){
 		error_log($s);
 	}
 }
@@ -15,10 +15,14 @@ $degree = $_REQUEST['degree'];
 
 debugPrint("term: $origsearchterm type: $searchtype degree: $degree");
 
-$searchterm = str_replace(" ", "\\ ", $origsearchterm );
-$searchterm = urlencode($searchterm);
+// replace problematic characters
+$s1 = str_replace(array('\\','|', '/', '-','*',',','?','%'), "", $origsearchterm);
+// replace the multiple contiguous spaces left (or urlencode gives  multipole +
+$s2 = preg_replace('#\s+#', ' ', $s1);
+// make it safe for web passage
+$searchterm = urlencode($s2);
 
-debugPrint("searchterm after str replace: $searchterm");
+debugPrint("searchterm after str_replace: $searchterm");
 // sample:
 // http://api.lib.harvard.edu/v2/items.json?subject=peanuts
 
