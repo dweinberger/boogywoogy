@@ -278,7 +278,7 @@ function fetchBooks(clickedBox_xy){
 		// what type of search?
 		switch (slidervalue){
 			case "STRICTEST":
-				if ($.isArray(gbookgrid[booknumb]["subject"])){
+				if ( ($.isArray(gbookgrid[booknumb]["subject"])) && (gbookgrid[booknumb]["subject"][0] !== undefined  ) ){
 					term = gbookgrid[booknumb]["subject"][0];
 				}
 				else { 	// Sleazy: If LibCloud returns no subject, 
@@ -290,7 +290,7 @@ function fetchBooks(clickedBox_xy){
 				break;
 			case "STRICT":
 				// get last subject and do subject search
-				if ($.isArray(gbookgrid[booknumb]["subject"])){
+				if ( ($.isArray(gbookgrid[booknumb]["subject"])) && (gbookgrid[booknumb]["subject"][0] !== undefined  ) ){
 					var z =  gbookgrid[booknumb]["subject"].length;
 					z = z - 1;
 					term = gbookgrid[booknumb]["subject"][z];
@@ -303,7 +303,7 @@ function fetchBooks(clickedBox_xy){
 				break;
 			case "SORTOF":
 				// get the first subject's first word, do keyword search
-				if ($.isArray(gbookgrid[booknumb]["subject"])){
+				if ( ($.isArray(gbookgrid[booknumb]["subject"])) && (gbookgrid[booknumb]["subject"] !== undefined  ) ){
 					term = gbookgrid[booknumb]["subject"][0];
 				}
 				else { // if LibCloud returned no subject
@@ -316,11 +316,12 @@ function fetchBooks(clickedBox_xy){
 				typeofsearch = "KEYWORD";
 				searchArray.push({searchnumber : gsearchnumber, subjterm : "", keyterm: term, degree : "SortOf"});
 				break; 
+				
 			case "WEAK":
 				//  subject search and keyword search
 				var title = gbookgrid[booknumb]["title"][0];
 				var titleterm = firstNonStopword(title);
-				if ($.isArray(gbookgrid[booknumb]["subject"])){
+				if ( ($.isArray(gbookgrid[booknumb]["subject"])) && (gbookgrid[booknumb]["subject"] !== undefined  ) ){
 					var z =  gbookgrid[booknumb]["subject"].length;
 					z = z - 1;
 					subjterm = gbookgrid[booknumb]["subject"][z];
