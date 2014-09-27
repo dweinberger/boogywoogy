@@ -131,8 +131,9 @@ function init(){
          	var title = gbookgrid[boxnumb].title.join(": ");
          	var subj = gbookgrid[boxnumb].subject.join("; ");
          	var auth = gbookgrid[boxnumb].author.join("; ");
-         	var tipcontent = "<div class='tiptitle'>" + title + "</div>" + "<div class='tipauth'>by " + auth + "</div>";
-         	var tipcontent = tipcontent + "<div class='tipsubj'>Subjects: " + subj + "</div>";
+         	var ddate = gbookgrid[boxnumb].year;
+         	var tipcontent = "<div class='tiptitle'>" + title + " (" + ddate + ")</div>" + "<div class='tipauth'><em>by</em> " + auth + "</div>";
+         	var tipcontent = tipcontent + "<div class='tipsubj'><em>Subjects</em>: " + subj + "</div>";
          	var i = gbookgrid[boxnumb].searchnumber;
          	var searchtxt = "<div class='tipsearch'>Search #" + (i + 1) + " " + searchArray[i]["degree"];
          	searchtxt = searchtxt + " Subject: \"" + searchArray[i]["subjterm"] +
@@ -392,6 +393,8 @@ function jsonIntoRecord(jsn){
 			tempbook["title"] = titlearray;
 			var hollisid = $(items[i]).parseItemJSON("hollisID");
 			tempbook["hollisid"] = hollisid;
+			var ddate = $(items[i]).parseItemJSON("date");
+			tempbook["year"] = ddate;
 		
 		// add this to gbookline
 		gbookline.push(tempbook);	
@@ -508,6 +511,7 @@ function layOutLine(clickedBox){
 				gbookgrid[booknumber]["author"] = gbookline[i]["author"];
 				gbookgrid[booknumber]["searchnumber"] = gsearchnumber;
 				gbookgrid[booknumber]["hollis"] = gbookline[i]["hollisid"];
+				gbookgrid[booknumber]["year"] = gbookline[i]["year"];
 			}
 				
 		}
@@ -552,6 +556,7 @@ function layOutLine(clickedBox){
 				gbookgrid[booknumber]["author"] = gbookline[i]["author"];
 				gbookgrid[booknumber]["searchnumber"] = gsearchnumber;
 				gbookgrid[booknumber]["hollis"] = gbookline[i]["hollisid"];
+				gbookgrid[booknumber]["year"] = gbookline[i]["year"];
 			}	
 		}
 	}
