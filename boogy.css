@@ -120,7 +120,11 @@
 	margin-top: 8px;
 	
 }
-
+#bottomspacer{
+	clear: both;
+	width: 100%
+	height: 100px;
+}
 
 .horizontal{
 	/* 
@@ -210,4 +214,89 @@ background-color:#DAD6B6;
 	
 	line-height: 90%;
 }
+#catcarddiv{
+	width: 300px;
+	max-height: 420px;
+	position:absolute;
+	border: 4px solid #F0F;
+	/* background-color: #898989; */
+	z-index: 13000;
+	/* box sizing puts the border on the inside */
+	box-sizing:border-box;
+  	-moz-box-sizing:border-box;
+  	-webkit-box-sizing:border-box;
+  		-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
+.cardtitle{
+	font-size: 16px;
+	font-family: Georgia,Bookman, "Times Roman", Serif;
+	opacity: 0.8;
+	/* color: black; */
+}
+.cardauthor{
+font-size: 14px;
+	font-family: Georgia,Bookman, "Times Roman", Serif;
+	opacity: 0.8;
+	
+}
+#catcardBasicInfo{
+	width: 95%;
+	text-align: center;
+	border: 1px solid #898989;
+	opacity: 0.8;
+}
+#catcardAbstract{
+	font-size: 12px;
+	font-family: Georgia,Bookman, "Times Roman", Serif;
+	background-color: #E4E6FA;
+	color: black; 
+	overflow: scroll;
+	border: 1px solid #70717C;
+	max-height: 200px;
+	min-height: 50px;
+	opacity: 0.9;
+	padding: 5px;
+}
+#cardcatbtndiv{
+	width: 240px;
+	clear:both
+	/* bottom: 2px; */
+	height: 15px;
+	background-color: red;
+	color: white;
+	font-family: "Open Sans," "Helvetica Neue", Helvetica, Arial, Verdana, Sans Serif;
+	font-size: 12px;
+	padding: 5px;
+	border-radius: 5px;
+	/* text-align: center; */
+	margin: 0 auto;
+}
+#hidecard{
+	float:right;
+}
+
+/* --- TIPSTER ---*/
+
+.tipster-theme-dw {
+	background-color: #FF9924; /* for browser that don't accept alpha in color*/
+  background-color: rgba(255, 255, 255, 0.7);
+	width: 500px;
+	color: #fff;
+	/* width is set in tipster-base in tipster.css, which overrides this. So I nuked it */
+	
+}
+/* Use this next selector to style things like font-size and line-height: */
+.tipster-theme-dw .tooltipster-content {
+	font-family: "Open Sans",Arial, sans-serif;
+	font-size: 14px;
+	line-height: 16px;
+	padding: 8px 10px;
+	opacity: 0.8;
+}
+ 
+
+
 

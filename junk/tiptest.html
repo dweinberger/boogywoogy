@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF8">
+		<title>BoogyWoogy Browser</title>
+		
+<link href="includes/tooltipster-master/css/tooltipster.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="includes/jquery-1.11.0.min.js"></script>
+
+<script type="text/javascript" src="includes/tooltipster-master/js/jquery.tooltipster.js"></script>
+<script type="text/javascript" src="tiptest.js"></script>
+
+
+<script language="javascript" type="text/javascript">
+	$(document).ready(function(){	
+		init();
+	});
+</script>
+
+<style>
+.my-custom-theme {
+	border-radius: 5px; 
+	border: 2px solid #000;
+	background: #4c4c4c;
+	color: #fff;
+}
+.my-custom-theme .tooltipster-content {
+	font-family: Arial, sans-serif;
+	font-size: 36px;
+	line-height: 16px;
+	padding: 8px 10px;
+}
+</style>
+
+<body>
+<input type="button" value="toggle" onclick="$('#id2').fadeToggle()">
+
+<p class="tooltip notip" id="id2"><em>no tip masdm asas dflkasf lkasdfl</em></p>
+
+<div class="tooltip tip" id="id1" x="X" title="titletext" style="background-color:yellow; width:150px">ID1 - tip</div>
+
+
+</body>
+</html>

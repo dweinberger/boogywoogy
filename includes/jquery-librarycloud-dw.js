@@ -2,47 +2,22 @@
 
 (function ( $ ) {
 
-	function getObjects(obj, key, val) {
-	// finds all objects with keyword with a particular value
-	// thank you, Box9: http://stackoverflow.com/questions/4992383/use-jquerys-find-on-json-object
-    var objects = [];
-    for (var i in obj) {
-        if (!obj.hasOwnProperty(i)) continue;
-        if (typeof obj[i] == 'object') {
-            objects = objects.concat(getObjects(obj[i], key, val));
-        } else if (i == key){// && obj[key] == val) {
-            objects.push(obj);
-        }
-       //  if (i === "point" && obj["point"] == "start") {
-//         	objects.push({start : obj["$"]});
-//         }
-    }
-    return objects;
-	}
-	
+
 	$.fn.parseItemJSON = function( action,returntype ) {
-		// turns results from an item in a results list from
-		// the LibraryCloud item API into an array of useful results
-		// Returns arrays for: 
-		// 		subject, author, title
-		// Returns single value for:
-		//		hollisID, date
+		// KEYWORDS
+		// If returns an array, it returns an empty array if nothing found
+		// Strings return "" if none found
+		//
+		// date : string, including start-finish ranges when it can find them,
+		//					all completely non-normalized
+		// author: array
+		// subject:array
+		// title: array
+		// publisher: array
+		// hollisid: string
+		// abstract: array
 		
-		if (action == "datefailed"){
-			var originItem = this[0]["mods"]["originInfo"];
-			
-			var flatarray = $.map(originItem, function recurs(n) {
-				return ($.isArray(n["$"]) ? $.map(n, recurs): n);
-			});
-			// var greparray = $.grep(originItem, function(obj) {
-// 				if (3 == 3) {
-// 					
-//     			return obj }// != undefined;
-// 				});
-			var dates = getObjects(originItem, "dateIssued", "$");
-			var x = 3;
-		
-		}
+
 		
 		// -- DATE
 		if (action == "date"){
@@ -201,8 +176,79 @@
 			}
 		}
 	
+	// --- PUBLISHER
+		if (action === "publisher"){
+			var item = this[0]["mods"]["originInfo"];
+			if (item == undefined){
+				return [];
+			}
+			if (item["publisher"] !== undefined){
+				return item["publisher"];
+			}
+			else {
+				// look in the array of objects for a publisher
+				if ($.isArray(item) == true){
+					for (var i=0; i < item.length; i++){
+						if (item[i].publisher !== undefined){
+							var pub = item[i].publisher;
+						}
+					}
+					return pub;
+				}
+			}
+			return "";
+		}
+		
+		// --- ABSTRACT
+		if (action === "abstract"){
+			var item = this[0]["mods"]["abstract"];
+			if (item == undefined){
+				return "";
+			}
+			else {
+				return this[0]["mods"]["abstract"]
+			}
+			return "";
+		}
 	
 
 	};
+	
+/*--------------------- IGNORE  BEYOND THIS: FAILED EXPERIMENTS---------------------------------------
+	function getObjects(obj, key, val) {
+	// finds all objects with keyword with a particular value
+	// thank you, Box9: http://stackoverflow.com/questions/4992383/use-jquerys-find-on-json-object
+    var objects = [];
+    for (var i in obj) {
+        if (!obj.hasOwnProperty(i)) continue;
+        if (typeof obj[i] == 'object') {
+            objects = objects.concat(getObjects(obj[i], key, val));
+        } else if (i == key){// && obj[key] == val) {
+            objects.push(obj);
+        }
+       //  if (i === "point" && obj["point"] == "start") {
+//         	objects.push({start : obj["$"]});
+//         }
+    }
+    return objects;
+	}
+	
+		if (action == "datefailed"){
+			var originItem = this[0]["mods"]["originInfo"];
+			
+			var flatarray = $.map(originItem, function recurs(n) {
+				return ($.isArray(n["$"]) ? $.map(n, recurs): n);
+			});
+			// var greparray = $.grep(originItem, function(obj) {
+// 					
+//     			return obj }// != undefined;
+// 				});
+			var dates = getObjects(originItem, "dateIssued", "$");
+			var x = 3;
+		
+		}
+	
+
+--------------------- IGNORE ---------------------------------------*/
 	
 }( jQuery ));

@@ -1,5 +1,4 @@
 /* BoogyWoogy browser 
-	v.2 Sept. 30, 2014
 
 	This is an early, prototype demo of some of the basic services of Harvard LibraryCloud, and open metadata server being developed under an Arcardia Foundation grant provided by the Harvard Library Lab. 
 	
@@ -54,7 +53,6 @@ var numbOfRows = 13;
 var numbOfCols = 13;
 
 var gClickedBox = [-1, -1];
-var gHoverbox = [-1, -1];
 var gsearchnumber = -1;
 var gslidervalue = -1;
 var books = new Array();
@@ -90,7 +88,7 @@ function init(){
 			ctr++;
 		   // create new div
 		   div = document.createElement('div');
-		   div.setAttribute("class","b tooltip");
+		   div.setAttribute("class","b");
 		   var id = i + ":" + j;
 		   //div.setAttribute("onhover","hoverPopUp('" + id + "')");
 		   div.setAttribute("onclick","fetchARow('" + i + "','" + j + "')");
@@ -121,26 +119,17 @@ function init(){
 	// randomize backgrounds (with associated font colors)	
 	colors = randomizeArray(colors);
 	
-	$('.b').hover(function(e){
-		gHoverbox = [$(this).attr("x"), $(this).attr("y")];
-	});
+	// Set up Qtip for hovering
+	// This generates errors. I can't figure out how to get it to attach only 
+	// to squares that have a searchnumb > -1. So I'm leaving with the error
+	// notifications. Hobbyist!
 	
+	 $("[searchnumb!='-1']").qtip({ // Grab some elements to apply the tooltip to
 	
-	// tipster for hovering
-	
-	
-	  $('.b').tooltipster({
-	  // 	position: "bottom-right",
-	  	theme: "tipster-theme-dw",
-	  	autoClose: "false"
-	  });
-
-	
-	
-  $("[searchnumb!='-1'] .b").tooltipster('content', function(){
-  		if ($("#catcarddiv").is(":visible") == false){
-  			var x = gHoverbox[0];
-  			var y = gHoverbox[1];
+    content: {
+         text: function(e){
+         	var x = $(this).attr("x");
+         	var y = $(this).attr("y");
          	var boxnumb = getBoxNumber(x,y);
          	var title = gbookgrid[boxnumb].title.join(": ");
          	var subj = gbookgrid[boxnumb].subject.join("; ");
@@ -154,10 +143,22 @@ function init(){
          				"\" Keyword: \"" + searchArray[i]["keyterm"] + "\"";
          	tipcontent = tipcontent + searchtxt + "</div>";
          	return tipcontent;
-  		}
-  		
-  		});
-
+         }
+        },
+    position: {
+		corner: {
+				target: 'topMiddle',
+				tooltip: 'bottomMiddle'
+			}
+		}
+       
+    
+     
+ });
+ 	// can't get styles to work
+  $("[searchnumb!='-1']" ).qtip({ 
+  	style: {classes: 'qtip-dark qtip-rounded'}
+  });
 
 	//--- set slider values
 	

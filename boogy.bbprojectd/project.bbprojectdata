@@ -10,6 +10,7 @@
 		<string>56331C39-4107-4629-91C3-F7A1FF2E2836</string>
 		<string>2E8F3560-378B-449F-8E81-CBCEE70E8568</string>
 		<string>7694887A-4ECB-4AD5-A225-AB54DB46BFBC</string>
+		<string>7E7BFDC3-44F9-4E99-88F6-187017343973</string>
 	</array>
 	<key>ProjectItems</key>
 	<dict>
@@ -221,6 +222,61 @@
 			<string>boogy.php</string>
 			<key>ItemType</key>
 			<string>FileReference</string>
+		</dict>
+		<key>7E7BFDC3-44F9-4E99-88F6-187017343973</key>
+		<dict>
+			<key>ItemData</key>
+			<dict>
+				<key>BookmarkData</key>
+				<data>
+				Ym9vawQEAAAAAAQQMAAAAAAAAAAAAAAAAAAAAAAAAAAA
+				AAAAAAAAAAAAAAAAAAAAGAMAAAwAAAABAQAAQXBwbGlj
+				YXRpb25zBAAAAAEBAABNQU1QBgAAAAEBAABodGRvY3MA
+				AA8AAAABAQAAaGFydmFyZExpYkNsb3VkABEAAAABAQAA
+				Ym9vZ3l3b29neWJyb3dzZXIAAAAIAAAAAQEAAGluY2x1
+				ZGVzHAAAAAEBAABqcXVlcnkuc2Nyb2xsaW50b3ZpZXcu
+				bWluLmpzHAAAAAEGAAAEAAAAGAAAACQAAAA0AAAATAAA
+				AGgAAAB4AAAACAAAAAQDAACyIqUAAAAAAAgAAAAEAwAA
+				CKixAAAAAAAIAAAABAMAANy1sQAAAAAACAAAAAQDAACx
+				dQIBAAAAAAgAAAAEAwAAAKUCAQAAAAAIAAAABAMAAICn
+				AgEAAAAACAAAAAQDAADshxABAAAAABwAAAABBgAAwAAA
+				ANAAAADgAAAA8AAAAAABAAAQAQAAIAEAAAgAAAAABAAA
+				QbnYWr8AAAAYAAAAAQIAAAEAAAAAAAAADwAAAAAAAAAA
+				AAAAAAAAAAAAAAABBQAABAAAAAMDAAACAAAAAwAAAAEB
+				AABTU0QACAAAAAQDAAAAgOYIdwAAAAgAAAAABAAAQbdV
+				DQcAAAAkAAAAAQEAAEZEQjAxRjNFLTg5OUItMzUxNi1B
+				ODlELTU3NDI5NEQ4ODY5MBgAAAABAgAAgQAAAAEACADv
+				FwAAAQAIAAAAAAAAAAAAAQAAAAEBAAAvAAAA8gAAAAEC
+				AABlMzU4NzIxNTEzZjE0YzE5MzEwNzAwMDJhNjFlMjFm
+				ODM4NTVjZjYwOzAwMDAwMDAwOzAwMDAwMDAwOzAwMDAw
+				MDAwMDAwMDAwMjA7Y29tLmFwcGxlLmFwcC1zYW5kYm94
+				LnJlYWQtd3JpdGU7MDAwMDAwMDE7MDEwMDAwMDY7MDAw
+				MDAwMDAwMTEwODdlYzsvYXBwbGljYXRpb25zL21hbXAv
+				aHRkb2NzL2hhcnZhcmRsaWJjbG91ZC9ib29neXdvb2d5
+				YnJvd3Nlci9pbmNsdWRlcy9qcXVlcnkuc2Nyb2xsaW50
+				b3ZpZXcubWluLmpzAAAAtAAAAP7///8BAAAAAAAAAA4A
+				AAAEEAAAnAAAAAAAAAAFEAAAMAEAAAAAAAAQEAAAZAEA
+				AAAAAABAEAAAVAEAAAAAAABVEAAAjAEAAAAAAABWEAAA
+				hAEAAAAAAAACIAAAEAIAAAAAAAAQIAAAmAEAAAAAAAAR
+				IAAAxAEAAAAAAAASIAAApAEAAAAAAAATIAAAtAEAAAAA
+				AAAgIAAA8AEAAAAAAAAwIAAAhAEAAAAAAACA8AAAHAIA
+				AAAAAAA=
+				</data>
+				<key>FileURL</key>
+				<string>file://localhost/Applications/MAMP/htdocs/harvardLibCloud/boogywoogybrowser/includes/jquery.scrollintoview.min.js</string>
+				<key>RelativePath</key>
+				<string>./includes/jquery.scrollintoview.min.js</string>
+				<key>TypeID</key>
+				<string>_CFileLocator</string>
+				<key>Version</key>
+				<integer>1</integer>
+			</dict>
+			<key>ItemName</key>
+			<string>jquery.scrollintoview.min.js</string>
+			<key>ItemType</key>
+			<string>FileReference</string>
+			<key>UserOverrideItemName</key>
+			<true/>
 		</dict>
 		<key>DBDAAFB1-1BAE-4487-8240-7EE50E77C9D8</key>
 		<dict>
