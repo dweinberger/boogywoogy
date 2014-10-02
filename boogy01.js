@@ -33,14 +33,15 @@
 
 // Globals. Yes, globals, dammit. I said I'm a hobbyist!
 
-function Book(img,title,author,subject,year,hollisid,abstract){
+function Book(img,title,author,subject,year,hollisid,abs,toc){
 	this.img = img;
 	this.title = title;
 	this.author = author;
 	this.subject=subject;
 	this.year = year;
 	this.hollisid=hollisid;
-	this.abstract = abstract;
+	this.abstract = abs;
+	this.toc = toc;
 }
 
 function Square(x,y,bookid,direction,searchnumber){
@@ -174,23 +175,23 @@ function init(){
 		var slideval = data.value;
 		if (slideval < 0.2){
 			$("#slidertext").html("STRICTEST");
-			$("#slidertext").css({"color":"black","font-weight":"300","font-size":"12px"});	
+		//	$("#slidertext").css({"color":"black","font-weight":"300","font-size":"12px"});	
 		}
 		if ((slideval >= 0.2) && (slideval < 0.4)) {
 			$("#slidertext").html("STRICT");
-			$("#slidertext").css({"color":"#404040","font-weight":"400","font-size":"14px"});
+			//$("#slidertext").css({"color":"#404040","font-weight":"400","font-size":"14px"});
 		}
 		if ((slideval >= 0.4) && (slideval < 0.6)){
 			$("#slidertext").html("SORTOF");
-			$("#slidertext").css({"color":"#782C37","font-weight":"600","font-size":"16px"});
+			//$("#slidertext").css({"color":"#782C37","font-weight":"600","font-size":"16px"});
 		}
 		if ((slideval >= 0.6) && (slideval < 0.8)){
 			$("#slidertext").html("WEAK");
-			$("#slidertext").css({"color":"#9A5C34","font-weight":"700","font-size":"20px"});
+			//$("#slidertext").css({"color":"#9A5C34","font-weight":"700","font-size":"20px"});
 		}
 		if (slideval >= 0.8){
 			$("#slidertext").html("KEVIN BACON");
-			$("#slidertext").css({"color":"red","fontWeight":"800","font-size":"24px"});
+			// $("#slidertext").css({"color":"red","fontWeight":"800","font-size":"24px"});
 		}
 	});
 	// set the slider to default
@@ -232,7 +233,8 @@ function init(){
 	$("#searchbox").keypress(function(e){
 		if (e.which === 13){
 			startSearch();
-			return false;
+			$("#searchbox").blur(); // remove focus
+			event.preventDefault();
 		}
 	});
 	
@@ -285,7 +287,8 @@ function init(){
 		}
 	});
 	
-	startSearch();
+	// for debugging:
+	//startSearch();
 	
 }
 
@@ -464,6 +467,8 @@ function jsonIntoRecord(jsn){
 			tempbook["year"] = ddate;
 			var aabstract = $(items[i]).parseItemJSON("abstract");
 			tempbook["abstract"] = aabstract;
+			var toc = $(items[i]).parseItemJSON("tableOfContents");
+			tempbook["toc"] = toc;
 		
 		// add this to gbookline
 		gbookline.push(tempbook);	
@@ -584,6 +589,7 @@ function layOutLine(clickedBox){
 				gbookgrid[booknumber]["hollis"] = gbookline[i]["hollisid"];
 				gbookgrid[booknumber]["year"] = gbookline[i]["year"];
 				gbookgrid[booknumber]["abstract"] = gbookline[i]["abstract"];
+				gbookgrid[booknumber]["toc"] = gbookline[i]["toc"];
 			}
 				
 		}
@@ -630,6 +636,7 @@ function layOutLine(clickedBox){
 				gbookgrid[booknumber]["hollis"] = gbookline[i]["hollisid"];
 				gbookgrid[booknumber]["year"] = gbookline[i]["year"];
 				gbookgrid[booknumber]["abstract"] = gbookline[i]["abstract"];
+				gbookgrid[booknumber]["toc"] = gbookline[i]["toc"];
 			}	
 		}
 	}
@@ -779,6 +786,7 @@ function resetGrid(){
 	grid = []; 
 	searchArray = [];
 	gcolorctr = 0;
+	$("#cardcatdiv").hide();
 	init();
  }
  
@@ -820,43 +828,38 @@ function launchCatCard(box){
 	// displays the inplace card with more info.
 	
 	// turn off qtips
-	$(".qtip").hide();
+	//$(".qtip").hide();
 	
 	// -- get the boxnumber
 	var pos = $(box).offset();
-	//var pos2 = $(box).position();
-	var boxtop = pos["top"]; //box.offsetTop; //pos[0];
-	var boxleft = pos["left"];// box.offsetLeft; // pos[1];
+	var boxtop = pos["top"]; 
+	var boxleft = pos["left"];
 	var r = parseInt(box.getAttribute("x"));
 	var c = parseInt(box.getAttribute("y"));
+	var boxnumb = getBoxNumber(r,c);
 	// set this as the clicked box
 	clickedABox(r,c);
 	
 	// -- create the content
 	var contdiv = document.getElementById("cardcont");
-	// blank out the previous content
-	$(contdiv).html("");
-	var boxnumb = getBoxNumber(r,c);
-	// create div for basic info
-	var div = document.createElement("div");
-	div.setAttribute("id","catcardBasicInfo");
+	
 	// title
-	var div = document.createElement("div");
-	div.setAttribute("class","cardtitle");
-	$(div).html(gbookgrid[boxnumb]["title"].join(": "));
-	$(contdiv).append(div);
+	var title="";
+	if (gbookgrid[boxnumb]["title"] !== undefined){
+		$("#cardtitle").html(gbookgrid[boxnumb]["title"].join(": "));
+	}
+	
 	// year
 	if (gbookgrid[boxnumb]["year"] !== undefined){
-		var span = document.createElement("span");
-		span.setAttribute("class","cardyear");
-		$(span).html(" [" + gbookgrid[boxnumb]["year"] + "]");
-		$(div).append(span);
+		$("#cardyear").html(" [" + gbookgrid[boxnumb]["year"] + "]");
 	}
+	
 	// author
-	var div = document.createElement("div");
-	div.setAttribute("class","cardauthor");
-	$(div).html(gbookgrid[boxnumb]["author"].join("; "));
-	$(contdiv).append(div);
+	var author="";
+	if (gbookgrid[boxnumb]["author"] !== undefined){
+		$("#cardauthor").html(gbookgrid[boxnumb]["author"].join(": "));
+	}
+	
 	// abstract
 	if ( (gbookgrid[boxnumb]["abstract"] !== undefined) && (gbookgrid[boxnumb]["abstract"] !=="")){
 		if ($.isArray(gbookgrid[boxnumb]["abstract"])){
@@ -868,14 +871,37 @@ function launchCatCard(box){
 	
 	}
 	else{
-		abs = "No abstract";
+		abs = "No abstract.";
+	}
+	$("#cardabstract").html(abs);
+	if (abs !== "No abstract."){
+		$("#cardabstract").slideDown(abs);
+	}
+	else{
+		$("#cardabstract").slideUp(abs);
 	}
 	
-		var div = document.createElement("div");
-		div.setAttribute("id","catcardAbstract");
-		$(div).html(abs);
-		$(contdiv).append(div);
+	// table of contents
+	if ( (gbookgrid[boxnumb]["toc"] !== undefined) && (gbookgrid[boxnumb]["toc"] !=="")){
+		if ($.isArray(gbookgrid[boxnumb]["toc"])){
+			var toc = gbookgrid[boxnumb]["toc"].join("<P>");
+		}
+		else{
+			var toc = gbookgrid[boxnumb]["toc"];
+		}
+	
+	}
+	else{
+		toc = "No table of contents.";
 		
+	}
+	$("#cardtoc").html(toc);
+	if (toc !== "No table of contents.") {
+		$("#cardtoc").slideDown(300);
+	}
+	else {
+		$("#cardtoc").slideUp(300);
+	}
 		
 	// -- position it
 	// get the position of the outerdiv so we can add it to the offset
@@ -885,12 +911,14 @@ function launchCatCard(box){
 	cardheight = $(catcard).height();
 	var extraoffset = $("#outerdiv").offset(); // we're positioning absolutely so need offset
 	// set left
-	if (c < 7) {
-		cardleft = boxleft + (60 - extraoffset["left"]);
-	}
-	else {
-		cardleft = boxleft - (300  + extraoffset["left"]);
-	}
+// 	if (c < 7) {
+// 		cardleft = boxleft + (60 - extraoffset["left"]);
+// 	}
+// 	else {
+// 		cardleft = boxleft - (300  + extraoffset["left"]);
+// 	}
+// 	// anchor it al the way on the right
+	cardleft = "830px";
 	// set top
 	if (r > 7) {
 		cardtop = boxtop - ((cardheight - 60) + extraoffset["top"]);
@@ -908,7 +936,9 @@ function launchCatCard(box){
 	
 	// show it
 	
-	$(catcard).css({top : cardtop, left : cardleft, backgroundColor : targetbgcolor, color : targetcolor});
+	$("#cardtitle").css({ backgroundColor : targetbgcolor, color : targetcolor});
+	$(catcard).css({left : cardleft});
+	$(catcard).animate({top : cardtop + "px"});
 	$(catcard).show(300);
 	
 	

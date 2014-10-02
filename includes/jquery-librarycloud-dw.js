@@ -16,6 +16,7 @@
 		// publisher: array
 		// hollisid: string
 		// abstract: array
+		// tableOfContents: string
 		
 
 		
@@ -166,7 +167,7 @@
 		}
 		
 		// --- HOLLIS ID
-		if (action.toUpperCase === "HOLLISID"){
+		if (action.toUpperCase() === "HOLLISID"){
 			var item = this[0]["mods"]["recordInfo"]["recordIdentifier"];
 			if (item == undefined){
 				return "";
@@ -207,6 +208,17 @@
 			}
 			else {
 				return this[0]["mods"]["abstract"]
+			}
+			return "";
+		}
+		// --- TABLE OF CONTENTS
+		if (action.toUpperCase() === "TABLEOFCONTENTS"){
+			var item = this[0]["mods"]["tableOfContents"];
+			if (item == undefined){
+				return "";
+			}
+			else {
+				return this[0]["mods"]["tableOfContents"]
 			}
 			return "";
 		}

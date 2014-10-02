@@ -6,7 +6,7 @@
 	//$queryurl="http://hlslwebtest.law.harvard.edu/v2/api/item/?filter=collection:hollis_catalog%20AND%20id_inst:009487775";
 
 	$queryurl = "http://hlslwebtest.law.harvard.edu/v2/api/item/?filter=collection:hollis_catalog%20AND%20id_inst:" . $hollisid;
-
+	//echo ("query: $queryurl");
 	$ch = curl_init(); 
 	curl_setopt($ch, CURLOPT_URL, $queryurl);
 	// Return the transfer as a string 
